@@ -44,8 +44,15 @@ def fadeBlue():
     print('\nExiting')
   pwm2.stop()
   GPIO.cleanup()
-  GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
   GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
+  while True:
+    pwm = GPIO.PWM(red, f) 
+    pwm.start (dc)
+  
+  while 1:
+    for dc in range(101): # loop duty cycle from 0 to 100
+      pwm.ChangeDutyCycle(dc) # set duty cycle
+      sleep(0.01) # sleep 10 ms
 
 def fadeGreen():
   pwm1 = GPIO.PWM(green, 100)          # create PWM object @ 100 Hz
