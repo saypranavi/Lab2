@@ -43,14 +43,6 @@ def fadeBlue():
   except KeyboardInterrupt:       
     print('\nExiting')
   GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
-  while True:
-    pwm = GPIO.PWM(red, f) 
-    pwm.start (dc)
-  
-    while 1:
-      for dc in range(101): # loop duty cycle from 0 to 100
-        pwm.ChangeDutyCycle(dc) # set duty cycle
-        sleep(0.01) # sleep 10 ms
   pwm2.stop()
   GPIO.cleanup()
 
