@@ -1,6 +1,10 @@
 import RPi.GPIO as GPIO 
 GPIO.setmode(GPIO.BCM)
 
+import RPi.GPIO as gpio
+import time# Define input port numbers:
+from time import sleep
+
 def blink():
   pBlink = 26    # GPIO pin number
   f = 1     # frequency (Hz)
@@ -16,10 +20,8 @@ def blink():
     
   pwm.stop()
   GPIO.cleanup()
- 
-import RPi.GPIO as gpio
-import time# Define input port numbers:
-from time import sleep
+
+blink()
 
 # Fade
 
