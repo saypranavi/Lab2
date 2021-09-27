@@ -30,10 +30,11 @@ def blink():
     
 def fadeBlue():
   pwm2 = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
-
   try:
-    pwm2.start(0)                  # initiate PWM at 0% duty cycle
-    while 1:
+    if GPIO.input(inBlue) == GPIO.HIGH:
+      pred = GPIO.PWM(blue, f)
+      pred.start(0)
+      pwm2.start(0)                  # initiate PWM at 0% duty cycle
       for dc in range(101):       # loop duty cycle from 0 to 100
         pwm2.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01)               # sleep 10 ms
@@ -42,7 +43,6 @@ def fadeBlue():
         sleep(0.01) 
   except KeyboardInterrupt:       
     print('\nExiting')
-  GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
   pwm2.stop()
   GPIO.cleanup()
 
@@ -63,15 +63,15 @@ def fadeGreen():
   pwm1.stop()
   GPIO.cleanup()
   
-
+GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
 fadeBlue()
 
 
   # Blink
 # in1, in2 = 21, 24
 # GPIO.setmode(GPIO.BCM)
-# GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200)
+# GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fadeBlue, bouncetime=200)
 # while True:
 #     print('.', end='')
 #     time.sleep(0.1)
