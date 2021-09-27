@@ -9,7 +9,7 @@ inGreen = 24
 pblue = 19
 
 GPIO.setup(pblue, GPIO.IN)
-
+GPIO.setup(inBlue, GPIO.OUT)
 def blink():
   pBlink = 26    # GPIO pin number
   f = 1     # frequency (Hz)
