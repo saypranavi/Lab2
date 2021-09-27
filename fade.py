@@ -2,18 +2,19 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
-
+red = 26
+blue = 19
 inBlue = 21
 inGreen = 24
 
 GPIO.setup(inBlue, GPIO.IN)
 
 def blink():
-  pBlink = 26    # GPIO pin number
+  red = 26    # GPIO pin number
   f = 1     # frequency (Hz)
   dc = 50   # duty cycle (%)
-  GPIO.setup(pBlink, GPIO.OUT)
-  pwm= GPIO.PWM(pBlink, f)        # create PWM object
+  GPIO.setup(red, GPIO.OUT)
+  pwm= GPIO.PWM(red, f)        # create PWM object
   try:
     pwm.start(dc)             # initiate PWM object
     while True:
@@ -23,12 +24,11 @@ def blink():
   pwm.stop()
   GPIO.cleanup()
 
-blink()
     
 def fadeBlue():
-  p = 19
-  GPIO.setup(p, GPIO.OUT)
-  pwmfade = GPIO.PWM(p, 100)          # create PWM object @ 100 Hz
+  blue = 19
+  GPIO.setup(blue, GPIO.OUT)
+  pwmfade = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
 
   try:
     pwmfade.start(0)                  # initiate PWM at 0% duty cycle
