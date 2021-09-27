@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO 
-import time # Define input port numbers:
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
@@ -29,20 +28,20 @@ blink()
 def fadeBlue():
   p = 19
   GPIO.setup(p, GPIO.OUT)
-  pwm = GPIO.PWM(p, 100)          # create PWM object @ 100 Hz
+  pwmfade = GPIO.PWM(p, 100)          # create PWM object @ 100 Hz
 
   try:
-    pwm.start(0)                  # initiate PWM at 0% duty cycle
+    pwmfade.start(0)                  # initiate PWM at 0% duty cycle
     while 1:
       for dc in range(101):       # loop duty cycle from 0 to 100
-        pwm.ChangeDutyCycle(dc)   # set duty cycle
+        pwmfade.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01)               # sleep 10 ms
       for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
-        pwm.ChangeDutyCycle(dc)   # set duty cycle
+        pwmfade.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01) 
   except KeyboardInterrupt:       
     print('\nExiting')
-  pwm.stop()
+  pwmfade.stop()
   GPIO.cleanup()
 
 fadeBlue()
