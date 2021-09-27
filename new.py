@@ -55,4 +55,12 @@ def blink():
 
 GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
 GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fade(), bouncetime=200) 
-blink()
+pwm3= GPIO.PWM(red, f)        # create PWM object
+try:
+  pwm3.start(dc)             # initiate PWM object
+  while True:
+    pass
+except KeyboardInterrupt:   # stop gracefully on ctrl-C
+  print('\nExiting')
+pwm3.stop()
+GPIO.cleanup()
