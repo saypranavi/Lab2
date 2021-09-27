@@ -47,10 +47,10 @@ def fadeBlue():
     pwm = GPIO.PWM(red, f) 
     pwm.start (dc)
   
-  while 1:
-    for dc in range(101): # loop duty cycle from 0 to 100
-      pwm.ChangeDutyCycle(dc) # set duty cycle
-      sleep(0.01) # sleep 10 ms
+    while 1:
+      for dc in range(101): # loop duty cycle from 0 to 100
+        pwm.ChangeDutyCycle(dc) # set duty cycle
+        sleep(0.01) # sleep 10 ms
   pwm2.stop()
   GPIO.cleanup()
 
