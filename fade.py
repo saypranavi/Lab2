@@ -40,7 +40,7 @@ def fadeBlue():
         for dc in range(0, 100, 1):  
           pwm2.ChangeDutyCycle(dc)  
           sleep(0.01) 
-    #GPIO.cleanup()
+    GPIO.cleanup()
     pwm2.stop()
   except KeyboardInterrupt:       
     print('\nExiting')
