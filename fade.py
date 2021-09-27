@@ -44,6 +44,8 @@ def fadeBlue():
     print('\nExiting')
   pwm2.stop()
   GPIO.cleanup()
+  GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+  GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
 
 def fadeGreen():
   pwm1 = GPIO.PWM(green, 100)          # create PWM object @ 100 Hz
@@ -61,19 +63,16 @@ def fadeGreen():
     print('\nExiting')
   pwm1.stop()
   GPIO.cleanup()
+  
 
-fadeGreen()
+fadeBlue()
 
 
   # Blink
 # in1, in2 = 21, 24
 # GPIO.setmode(GPIO.BCM)
-GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(in2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-
-# def myCallback(pin):
-#     print("Rising edge detected on pin %d"% pin)
-GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200)
+# GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200)
 # while True:
 #     print('.', end='')
 #     time.sleep(0.1)
