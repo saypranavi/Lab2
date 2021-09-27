@@ -29,7 +29,7 @@ def blink():
 
     
 def fadeBlue():
-  pwm2 = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
+  pwm2 = GPIO.PWM(blue, 1)          # create PWM object @ 100 Hz
   try:
     if GPIO.input(inBlue) == GPIO.HIGH:
       pred = GPIO.PWM(blue, f)
