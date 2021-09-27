@@ -45,6 +45,8 @@ def fadeBlue():
   pwm.stop()
   GPIO.cleanup()
 
+fadeBlue()
+
 
   # Blink
 # in1, in2 = 21, 24
