@@ -3,8 +3,11 @@ import time # Define input port numbers:
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
+
 inBlue = 21
 inGreen = 24
+
+GPIO.setup(inBlue, GPIO.IN)
 
 def blink():
   pBlink = 26    # GPIO pin number
