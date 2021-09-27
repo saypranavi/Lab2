@@ -6,10 +6,9 @@ GPIO.setmode(GPIO.BCM)
 
 inBlue = 21
 inGreen = 24
-pblue = 19
 
-GPIO.setup(pblue, GPIO.IN)
-GPIO.setup(inBlue, GPIO.OUT)
+GPIO.setup(inBlue, GPIO.IN)
+
 def blink():
   pBlink = 26    # GPIO pin number
   f = 1     # frequency (Hz)
@@ -26,9 +25,9 @@ def blink():
   GPIO.cleanup()
     
 def fadeBlue():
-  pblue = 19
-  GPIO.setup(pblue, GPIO.OUT)
-  pwm = GPIO.PWM(pblue, 100)          # create PWM object @ 100 Hz
+  p = 19
+  GPIO.setup(p, GPIO.OUT)
+  pwm = GPIO.PWM(p, 100)          # create PWM object @ 100 Hz
 
   try:
     pwm.start(0)                  # initiate PWM at 0% duty cycle
