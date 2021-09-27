@@ -15,68 +15,32 @@ GPIO.setup(green, GPIO.OUT)
 GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(inGreen, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-
-def blink():
-  pwm3= GPIO.PWM(red, f)        # create PWM object
+def fade():          
+  pwm2 = GPIO.PWM(blue, 100)# create PWM object @ 100 Hz
+  pwm1 = GPIO.PWM(green, 100) # create PWM object @ 100 Hz
   try:
-    pwm3.start(dc)             # initiate PWM object
-    while True:
-      pass
-  except KeyboardInterrupt:   # stop gracefully on ctrl-C
-    print('\nExiting')
-  pwm3.stop()
-  GPIO.cleanup()
-
-    
-def fadeBlue():
-  pwm2 = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
-  try:
-    if GPIO.input(inBlue) == GPIO.HIGH:
-      pwm2 = GPIO.PWM(blue, f)
-      pwm2.start(0)
-      for dc in range(101):       # loop duty cycle from 0 to 100
-        pwm2.ChangeDutyCycle(dc)   # set duty cycle
-        sleep(0.01)               # sleep 10 ms
-      for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
-        pwm2.ChangeDutyCycle(dc)   # set duty cycle
-        sleep(0.01) 
+    while 1:
+      if GPIO.input(inBlue) == GPIO.HIGH:
+        pwm2.start(0) 
+        for dc in range(100, 0 , -1): 
+          pwm2.ChangeDutyCycle(dc)   
+          sleep(0.01)               
+        for dc in range(0, 100, 1):  
+          pwm2.ChangeDutyCycle(dc)  
+          sleep(0.01) 
+      if GPIO.input(inGreen) == GPIO.HIGH:
+        pwm1.start(0) 
+        for dc in range(100, 0 , -1): 
+          pwm1.ChangeDutyCycle(dc)   
+          sleep(0.01)               
+        for dc in range(0, 100, 1):  
+          pwm1.ChangeDutyCycle(dc)  
+          sleep(0.01)
+    pwm2.stop()
+    pwm1.stop()
+    GPIO.cleanup()
   except KeyboardInterrupt:       
     print('\nExiting')
-  pwm2.stop()
-  GPIO.cleanup()
 
-def fadeGreen():
-  pwm1 = GPIO.PWM(green, 100)          # create PWM object @ 100 Hz
-  try:
-    if GPIO.input(inGreen) == GPIO.HIGH:
-      pwm1 = GPIO.PWM(green, f)
-      pwm1.start(0)                 
-      for dc in range(101):       # loop duty cycle from 0 to 100
-        pwm1.ChangeDutyCycle(dc)   # set duty cycle
-        sleep(0.01)               # sleep 10 ms
-      for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
-        pwm1.ChangeDutyCycle(dc)   # set duty cycle
-        sleep(0.01) 
-  except KeyboardInterrupt:       
-    print('\nExiting')
-  pwm1.stop()
-  GPIO.cleanup()
-
-fadeGreen()
-
-  # Blink
-# in1, in2 = 21, 24
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(in2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-
-# def myCallback(pin):
-#     print("Rising edge detected on pin %d"% pin)
-GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200)
-GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fadeBlue, bouncetime=200)
-# while True:
-#     print('.', end='')
-#     time.sleep(0.1)
-#   GPIO.cleanup()
-
-#   myCallback()
-
+GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
+GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fade(), bouncetime=200) 
