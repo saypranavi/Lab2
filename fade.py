@@ -1,4 +1,22 @@
 import RPi.GPIO as GPIO 
+GPIO.setmode(GPIO.BCM)
+
+def blink():
+  pBlink = 26    # GPIO pin number
+  f = 1     # frequency (Hz)
+  dc = 50   # duty cycle (%)
+  GPIO.setup(pBlink, GPIO.OUT)
+  pwm= GPIO.PWM(pBlink, f)        # create PWM object
+  try:
+    pwm.start(dc)             # initiate PWM object
+    while True:
+      pass
+  except KeyboardInterrupt:   # stop gracefully on ctrl-C
+    print('\nExiting')
+    
+  pwm.stop()
+  GPIO.cleanup()
+ 
 import RPi.GPIO as gpio
 import time# Define input port numbers:
 from time import sleep
