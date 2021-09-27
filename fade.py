@@ -62,7 +62,7 @@ def fadeGreen():
   pwm1.stop()
   GPIO.cleanup()
   
-GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200) 
+GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue(), bouncetime=200) 
 
 fadeBlue()
 
