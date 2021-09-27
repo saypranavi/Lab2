@@ -2,49 +2,68 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
-red = 26
-blue = 19
+red = 26 #LED3
+blue = 19 #LED2
+green = 13 #LED1
 inBlue = 21
 inGreen = 24
+GPIO.setup(red, GPIO.OUT)
+GPIO.setup(blue, GPIO.OUT)
+GPIO.setup(green, GPIO.OUT)
+GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(inGreen, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-GPIO.setup(inBlue, GPIO.IN)
 
 def blink():
   red = 26    # GPIO pin number
   f = 1     # frequency (Hz)
   dc = 50   # duty cycle (%)
-  GPIO.setup(red, GPIO.OUT)
-  pwm= GPIO.PWM(red, f)        # create PWM object
+  pwm3= GPIO.PWM(red, f)        # create PWM object
   try:
-    pwm.start(dc)             # initiate PWM object
+    pwm3.start(dc)             # initiate PWM object
     while True:
       pass
   except KeyboardInterrupt:   # stop gracefully on ctrl-C
     print('\nExiting')
-  pwm.stop()
+  pwm3.stop()
   GPIO.cleanup()
 
     
 def fadeBlue():
-  blue = 19
-  GPIO.setup(blue, GPIO.OUT)
-  pwmfade = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
+  pwm2 = GPIO.PWM(blue, 100)          # create PWM object @ 100 Hz
 
   try:
-    pwmfade.start(0)                  # initiate PWM at 0% duty cycle
+    pwm2.start(0)                  # initiate PWM at 0% duty cycle
     while 1:
       for dc in range(101):       # loop duty cycle from 0 to 100
-        pwmfade.ChangeDutyCycle(dc)   # set duty cycle
+        pwm2.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01)               # sleep 10 ms
       for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
-        pwmfade.ChangeDutyCycle(dc)   # set duty cycle
+        pwm2.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01) 
   except KeyboardInterrupt:       
     print('\nExiting')
-  pwmfade.stop()
+  pwm2.stop()
   GPIO.cleanup()
 
-fadeBlue()
+def fadeGreen():
+  pwm1 = GPIO.PWM(green, 100)          # create PWM object @ 100 Hz
+
+  try:
+    pwm1.start(0)                  # initiate PWM at 0% duty cycle
+    while 1:
+      for dc in range(101):       # loop duty cycle from 0 to 100
+        pwm1.ChangeDutyCycle(dc)   # set duty cycle
+        sleep(0.01)               # sleep 10 ms
+      for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
+        pwm1.ChangeDutyCycle(dc)   # set duty cycle
+        sleep(0.01) 
+  except KeyboardInterrupt:       
+    print('\nExiting')
+  pwm1.stop()
+  GPIO.cleanup()
+
+fadeGreen()
 
 
   # Blink
