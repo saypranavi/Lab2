@@ -34,17 +34,17 @@ def fadeBlue():
     if GPIO.input(inBlue) == GPIO.HIGH:
       pred = GPIO.PWM(blue, f)
       pred.start(0)
-      pwm2.start(0)                  # initiate PWM at 0% duty cycle
+      #pwm2.start(0)                  # initiate PWM at 0% duty cycle
       for dc in range(101):       # loop duty cycle from 0 to 100
-        pwm2.ChangeDutyCycle(dc)   # set duty cycle
+        pred.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01)               # sleep 10 ms
       for dc in range(100, 0, -1):       # loop duty cycle from 0 to 100
-        pwm2.ChangeDutyCycle(dc)   # set duty cycle
+        pred.ChangeDutyCycle(dc)   # set duty cycle
         sleep(0.01) 
+    pred.stop()
+  #GPIO.cleanup()
   except KeyboardInterrupt:       
-    print('\nExiting')
-  pwm2.stop()
-  GPIO.cleanup()
+      print('\nExiting')
 
 def fadeGreen():
   pwm1 = GPIO.PWM(green, 100)          # create PWM object @ 100 Hz
