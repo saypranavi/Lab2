@@ -3,6 +3,8 @@ import time # Define input port numbers:
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
+inBlue = 21
+inGreen = 24
 
 def blink():
   pBlink = 26    # GPIO pin number
@@ -16,6 +18,8 @@ def blink():
       pass
   except KeyboardInterrupt:   # stop gracefully on ctrl-C
     print('\nExiting')
+  pwm.stop()
+  GPIO.cleanup()
     
 def fadeBlue():
   p = 19
@@ -33,24 +37,23 @@ def fadeBlue():
         sleep(0.01) 
   except KeyboardInterrupt:       
     print('\nExiting')
+  pwm.stop()
+  GPIO.cleanup()
 
-fadeBlue()
 
-#   pwm.stop()
-#   GPIO.cleanup()
-
-#   # Blink
-#   in1, in2 = 21, 24
-#   GPIO.setmode(GPIO.BCM)
-#   GPIO.setup(in1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-#   GPIO.setup(in2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+  # Blink
+# in1, in2 = 21, 24
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(in1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# GPIO.setup(in2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
 # def myCallback(pin):
-#     print("Rising edge detected on pin %d"% pin)# Execute myCallback() if port 1 goes HIGH:
-#   GPIO.add_event_detect(in1, GPIO.RISING, callback=myCallback, bouncetime=200)# Infinite loop:
-#   while True:
+#     print("Rising edge detected on pin %d"% pin)
+GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fadeBlue, bouncetime=200)
+# while True:
 #     print('.', end='')
 #     time.sleep(0.1)
 #   GPIO.cleanup()
 
 #   myCallback()
+
