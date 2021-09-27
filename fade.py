@@ -47,7 +47,7 @@ def fadeBlue():
   # Blink
 # in1, in2 = 21, 24
 # GPIO.setmode(GPIO.BCM)
-# GPIO.setup(in1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # GPIO.setup(in2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 
 # def myCallback(pin):
