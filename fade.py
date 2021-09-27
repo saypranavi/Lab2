@@ -23,6 +23,8 @@ def blink():
     print('\nExiting')
   pwm.stop()
   GPIO.cleanup()
+
+blink()
     
 def fadeBlue():
   p = 19
