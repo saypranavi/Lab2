@@ -29,16 +29,17 @@ def blink():
 
     
 def fadeBlue():
-  pwm2 = GPIO.PWM(blue, 1)          # create PWM object @ 100 Hz
+  #pwm2 = GPIO.PWM(blue, 1)          # create PWM object @ 100 Hz
   try:
     while 1:
       if GPIO.input(inBlue) == GPIO.HIGH:
+        pwm2 = GPIO.PWM(blue, f)
         pwm2.start(0)                  # initiate PWM at 0% duty cycle
-        for dc in range(100, 0 , -1):       # loop duty cycle from 0 to 100
-          pwm2.ChangeDutyCycle(dc)   # set duty cycle
-          sleep(0.01)               # sleep 10 ms
-        for dc in range(0, 100, 1):       # loop duty cycle from 0 to 100
-          pwm2.ChangeDutyCycle(dc)   # set duty cycle
+        for dc in range(100, 0 , -1): 
+          pwm2.ChangeDutyCycle(dc)   
+          sleep(0.01)               
+        for dc in range(0, 100, 1):  
+          pwm2.ChangeDutyCycle(dc)  
           sleep(0.01) 
     #GPIO.cleanup()
     pwm2.stop()
