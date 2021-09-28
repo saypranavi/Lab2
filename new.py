@@ -22,7 +22,7 @@ def fade(self):
 
   try:
     if GPIO.input(inBlue) == GPIO.HIGH:
-      pwm2.start(0) 
+      pwm2.start(100) 
       for dc in range(100, 0 , -1): 
         pwm2.ChangeDutyCycle(dc)   
         sleep(0.01)               
@@ -37,9 +37,7 @@ def fade(self):
       for dc in range(0, 100, 1):  
         pwm1.ChangeDutyCycle(dc)  
         sleep(0.01)
-    pwm2.stop()
-    pwm1.stop()
-    GPIO.cleanup()
+
 
   except KeyboardInterrupt:       
     print('\nExiting')
@@ -65,6 +63,9 @@ while True:
   GPIO.output(red, 1)# set output to 3.3V
   sleep(0.5)
 
+pwm2.stop()
+pwm1.stop()
+GPIO.cleanup()
 
 
 # GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
