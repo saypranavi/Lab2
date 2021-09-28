@@ -15,11 +15,11 @@ GPIO.setup(green, GPIO.OUT)
 GPIO.setup(inBlue, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(inGreen, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-
+pwm2 = GPIO.PWM(blue, 100)# create PWM object @ 100 Hz
+pwm1 = GPIO.PWM(green, 100) # create PWM object @ 100 Hz
 
 def fade(self):          
-  pwm2 = GPIO.PWM(blue, 100)# create PWM object @ 100 Hz
-  pwm1 = GPIO.PWM(green, 100) # create PWM object @ 100 Hz
+
   try:
     if GPIO.input(inBlue) == GPIO.HIGH:
       pwm2.start(0) 
