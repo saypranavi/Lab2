@@ -30,7 +30,7 @@ def fade(self):
         pwm2.ChangeDutyCycle(dc)  
         sleep(0.01) 
     if GPIO.input(inGreen) == GPIO.HIGH:
-      pwm1.start(0) 
+      pwm1.start(100) 
       for dc in range(100, 0 , -1): 
         pwm1.ChangeDutyCycle(dc)   
         sleep(0.01)               
