@@ -41,9 +41,7 @@ def fade(self):
   except KeyboardInterrupt:       
     print('\nExiting')
   
-  pwm2.stop()
-  pwm1.stop()
-  GPIO.cleanup()
+
 
 # def blink():
 #   pwm3= GPIO.PWM(red, f)        # create PWM object
@@ -66,9 +64,9 @@ while True:
   GPIO.output(red, 1)# set output to 3.3V
   sleep(0.5)
 
-# pwm2.stop()
-# pwm1.stop()
-# GPIO.cleanup()
+pwm2.stop()
+pwm1.stop()
+GPIO.cleanup()
 
 
 # GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
