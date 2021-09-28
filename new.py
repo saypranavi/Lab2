@@ -19,23 +19,22 @@ def fade():
   pwm2 = GPIO.PWM(blue, 100)# create PWM object @ 100 Hz
   pwm1 = GPIO.PWM(green, 100) # create PWM object @ 100 Hz
   try:
-    while 1:
-      if GPIO.input(inBlue) == GPIO.HIGH:
-        pwm2.start(0) 
-        for dc in range(100, 0 , -1): 
-          pwm2.ChangeDutyCycle(dc)   
-          sleep(0.01)               
-        for dc in range(0, 100, 1):  
-          pwm2.ChangeDutyCycle(dc)  
-          sleep(0.01) 
-      if GPIO.input(inGreen) == GPIO.HIGH:
-        pwm1.start(0) 
-        for dc in range(100, 0 , -1): 
-          pwm1.ChangeDutyCycle(dc)   
-          sleep(0.01)               
-        for dc in range(0, 100, 1):  
-          pwm1.ChangeDutyCycle(dc)  
-          sleep(0.01)
+    if GPIO.input(inBlue) == GPIO.HIGH:
+      pwm2.start(0) 
+      for dc in range(100, 0 , -1): 
+        pwm2.ChangeDutyCycle(dc)   
+        sleep(0.01)               
+      for dc in range(0, 100, 1):  
+        pwm2.ChangeDutyCycle(dc)  
+        sleep(0.01) 
+    if GPIO.input(inGreen) == GPIO.HIGH:
+      pwm1.start(0) 
+      for dc in range(100, 0 , -1): 
+        pwm1.ChangeDutyCycle(dc)   
+        sleep(0.01)               
+      for dc in range(0, 100, 1):  
+        pwm1.ChangeDutyCycle(dc)  
+        sleep(0.01)
     pwm2.stop()
     pwm1.stop()
     GPIO.cleanup()
