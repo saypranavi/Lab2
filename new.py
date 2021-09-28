@@ -17,9 +17,10 @@ GPIO.setup(inGreen, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 pwm2 = GPIO.PWM(blue, 100)# create PWM object @ 100 Hz
 pwm1 = GPIO.PWM(green, 100) # create PWM object @ 100 Hz
+pwm1.start(100)
+pwm2.start(100)
 
 def fade(self):          
-
   try:
     if GPIO.input(inBlue) == GPIO.HIGH:
       pwm2.start(100) 
@@ -37,21 +38,23 @@ def fade(self):
       for dc in range(0, 100, 1):  
         pwm1.ChangeDutyCycle(dc)  
         sleep(0.01)
-
-
   except KeyboardInterrupt:       
     print('\nExiting')
-
-def blink():
-  pwm3= GPIO.PWM(red, f)        # create PWM object
-  try:
-    pwm3.start(dc)             # initiate PWM object
-    while True:
-      pass
-  except KeyboardInterrupt:   # stop gracefully on ctrl-C
-    print('\nExiting')
-  pwm3.stop()
+  
+  pwm2.stop()
+  pwm1.stop()
   GPIO.cleanup()
+
+# def blink():
+#   pwm3= GPIO.PWM(red, f)        # create PWM object
+#   try:
+#     pwm3.start(dc)             # initiate PWM object
+#     while True:
+#       pass
+#   except KeyboardInterrupt:   # stop gracefully on ctrl-C
+#     print('\nExiting')
+#   pwm3.stop()
+#   GPIO.cleanup()
 
 
 GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade, bouncetime=200) 
@@ -63,9 +66,9 @@ while True:
   GPIO.output(red, 1)# set output to 3.3V
   sleep(0.5)
 
-pwm2.stop()
-pwm1.stop()
-GPIO.cleanup()
+# pwm2.stop()
+# pwm1.stop()
+# GPIO.cleanup()
 
 
 # GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
