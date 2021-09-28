@@ -54,8 +54,8 @@ def blink():
   GPIO.cleanup()
 
 
-GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade, bouncetime=200) 
-GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fade, bouncetime=200) 
+GPIO.add_event_detect(inGreen, GPIO.RISING, callback=fade(), bouncetime=200) 
+GPIO.add_event_detect(inBlue, GPIO.RISING, callback=fade(), bouncetime=200) 
 
 while True:                
   GPIO.output(red, 0)# set output to 0
